@@ -10,6 +10,7 @@ import { Card } from "../components/Card.tsx";
 import { PageHeader } from "../components/PageHeader.tsx";
 import { Button } from "../components/Button.tsx";
 import { isFutureDatetimeLocal } from "../lib/datetime.ts";
+import { applyFieldErrors } from "../lib/formErrors.ts";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(160),
@@ -39,9 +40,7 @@ export function EventCreatePage() {
     },
     onError: (error) => {
       if (isValidationError(error)) {
-        for (const [field, message] of Object.entries(error.fieldErrors ?? {})) {
-          setError(field as keyof FormValues, { message });
-        }
+        applyFieldErrors<FormValues>(error.fieldErrors, setError);
       }
     },
   });

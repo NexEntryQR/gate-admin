@@ -13,7 +13,7 @@
     "@fontsource-variable/inter": "^5.3.0",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.60.0",
-    "gate-shared": "file:../gate-shared",
+    "gate-shared": "file:./gate-shared",
     "lucide-react": "^1.27.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

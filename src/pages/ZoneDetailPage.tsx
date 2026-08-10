@@ -25,6 +25,7 @@ import { Button } from "../components/Button.tsx";
 import { OccupancyGauge } from "../components/OccupancyGauge.tsx";
 import { EmptyState } from "../components/EmptyState.tsx";
 import { Skeleton } from "../components/Skeleton.tsx";
+import { applyFieldErrors } from "../lib/formErrors.ts";
 
 const DIRECTION_MODES = ["IN", "OUT", "BOTH"] as const;
 
@@ -70,9 +71,7 @@ export function ZoneDetailPage() {
     },
     onError: (error) => {
       if (isValidationError(error)) {
-        for (const [field, message] of Object.entries(error.fieldErrors ?? {})) {
-          gateForm.setError(field as keyof GateFormValues, { message });
-        }
+        applyFieldErrors<GateFormValues>(error.fieldErrors, gateForm.setError);
       }
     },
   });

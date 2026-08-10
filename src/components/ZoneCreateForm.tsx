@@ -14,6 +14,7 @@ import { Field, inputClass } from "./Field.tsx";
 import { ErrorBanner } from "./ErrorBanner.tsx";
 import { Card } from "./Card.tsx";
 import { Button } from "./Button.tsx";
+import { applyFieldErrors } from "../lib/formErrors.ts";
 
 const ZONE_TYPES = ["REGULAR", "VIP", "BACKSTAGE", "MEDIA", "CUSTOM"] as const;
 
@@ -55,9 +56,7 @@ export function ZoneCreateForm({
     },
     onError: (error) => {
       if (isValidationError(error)) {
-        for (const [field, message] of Object.entries(error.fieldErrors ?? {})) {
-          setError(field as keyof FormValues, { message });
-        }
+        applyFieldErrors<FormValues>(error.fieldErrors, setError);
       }
     },
   });
