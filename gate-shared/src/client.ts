@@ -1,7 +1,7 @@
 import { parseApiError } from "./problemDetail.ts";
 
-// Each consuming app proxies /api -> http://localhost:8087/api via its own Vite dev server
-// config, so this never needs a configurable base URL.
+// Requests use the relative /api path. In dev, Vite proxies to the backend; on Vercel,
+// vercel.json rewrites /api/* to the Contabo server so the browser stays same-origin.
 const API_BASE = "/api";
 
 async function apiRequest<T>(path: string, init?: RequestInit): Promise<T> {
