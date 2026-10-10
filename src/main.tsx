@@ -11,16 +11,20 @@ import { ZoneDetailPage } from "./pages/ZoneDetailPage.tsx";
 import "./index.css";
 
 const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        { path: "/", element: <EventsListPage /> },
+        { path: "/events/new", element: <EventCreatePage /> },
+        { path: "/events/:eventId", element: <EventDetailPage /> },
+        { path: "/events/:eventId/zones/:zoneId", element: <ZoneDetailPage /> },
+      ],
+    },
+  ],
   {
-    element: <Layout />,
-    children: [
-      { path: "/", element: <EventsListPage /> },
-      { path: "/events/new", element: <EventCreatePage /> },
-      { path: "/events/:eventId", element: <EventDetailPage /> },
-      { path: "/events/:eventId/zones/:zoneId", element: <ZoneDetailPage /> },
-    ],
-  },
-]);
+    basename: "/admin",
+  }
+);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
